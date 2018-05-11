@@ -24,6 +24,11 @@ li {
 .column {
   display: flex;
   flex-direction: column;
-  width: 500px;
   align-items: center;
+  width: 600px;
+}
+
+.avatar {
+  width: 200px;
+  border-radius: 50%;
 }

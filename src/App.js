@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Artist from './Artist';
 import { FormGroup, FormControl, InputGroup, Glyphicon } from 'react-bootstrap';
 
 export default class App extends Component {
@@ -6,7 +7,8 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      searchQuery: ''
+      searchQuery: '',
+      artist: null
     }
   }
 
@@ -14,8 +16,7 @@ export default class App extends Component {
     let value = e.target.value ? e.target.value : '';
 
     this.setState({
-      searchQuery: value,
-      artist: null
+      searchQuery: value
     });
   }
 
@@ -59,13 +60,11 @@ export default class App extends Component {
             </InputGroup>
           </FormGroup>
         </div>        
-        <div>
-          <div>Artist Picture</div>
-          <div>Artist Name</div>
+        <div className='row'>
+          <Artist
+            artist={this.state.artist}
+          />
         </div>
-        <div>
-          gallery
-        </div>        
       </div>
     )
   }
