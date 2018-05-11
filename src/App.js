@@ -25,7 +25,7 @@ export default class App extends Component {
   submitData = (e) => {
     const BASE_URL = 'https://api.spotify.com/v1/search?';
     // access token has limit and will expire. need to go back to spotify example page and run the build to get new token
-    let accessToken = 'BQBlrgeVuF2d-DOYMDKgkMKTcOvqKKxXF91ZE7dbl5rYCCPVzccfKcbD4x4XUH0pNkHFL5TnTDZX3JAUG_Gc1H4chYi5wQ83kcOC4caqPJISi6E3Mq-6xOvOK7gAPyA_ZmNFlln8civExizumS5KNxlkMdJ1&refresh_token=AQC96DV_gbON3IqeAD0UqIjku-X2Snee3f6tp_QdnyRcX06N__Zz-KkcHlGlp1-XKdrstUHyuR3nsIeWFWt_XQXNUc0ZCOd37fHNkCTGR-NpnAKRWp7EsxeGvsFiEiE0ymc';
+    let accessToken = 'BQDiSYhwmztc0fBWLTV58R4v5zk_AD5goL1fb7GodBIquJX6HsqAUpzLloNTXcjmlFWtGVBnBRs8LOmwO5WpyLegU2wsnHwBFAT7EOKu0UEe2ARjs2xzpGi02qr4BdfJBAn0ZqySDVjGUCm6eOSWFkwmuiUe&refresh_token=AQBnbOOWnSFy29T1BuTCkXonjy1TlAoLkpfPQzfzIo0X5MrHIjyA8ZPg87ufM6tFNifzsAVj4LYyT3j_QwRLkaLuKehdNZQVadIamQCcaOLstIJTFHPBorgIVYZm2zq8uRU';
     let FETCH_URL = `${BASE_URL}q=${this.state.searchQuery}&type=artist&limit=1&access_token=${accessToken}`;
     let ALBUM_URL = 'https://api.spotify.com/v1/artists/'
 
