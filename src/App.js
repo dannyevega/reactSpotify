@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Artist from './Artist';
+import Gallery from './Gallery';
 import { FormGroup, FormControl, InputGroup, Glyphicon } from 'react-bootstrap';
 
 export default class App extends Component {
@@ -8,7 +9,8 @@ export default class App extends Component {
 
     this.state = {
       searchQuery: '',
-      artist: null
+      artist: null,
+      tracks: []
     }
   }
 
@@ -23,17 +25,31 @@ export default class App extends Component {
   submitData = (e) => {
     const BASE_URL = 'https://api.spotify.com/v1/search?';
     // access token has limit and will expire. need to go back to spotify example page and run the build to get new token
-    let accessToken = 'BQAt0MMl2IJ7eZTsV_RH8uBu0GS_Y52SoEzg2F3SQm2AhKHMqHnn_U2jmq6lW9S-4rO_GDxu7M4eNMPANTj-bl4TiQLXiwZaAiT4EDUf-Mm_OpT-cHOYRObnn65bH7DADqy9VK7uEskM98ATW2xPxzDiMawk&refresh_token=AQCWM8aAwiHTu4SE6FGK5rV4jBLLRn7a7gmKTndTN1wTDmlG7TRV1VT271pb5J2o8eS1_p7RpCpIGuIruTft26_TZxvbNnVLZ1xQn22R_qCuKUf3bVsPGn7hKzAD-nirEsM';
+    let accessToken = 'BQBlrgeVuF2d-DOYMDKgkMKTcOvqKKxXF91ZE7dbl5rYCCPVzccfKcbD4x4XUH0pNkHFL5TnTDZX3JAUG_Gc1H4chYi5wQ83kcOC4caqPJISi6E3Mq-6xOvOK7gAPyA_ZmNFlln8civExizumS5KNxlkMdJ1&refresh_token=AQC96DV_gbON3IqeAD0UqIjku-X2Snee3f6tp_QdnyRcX06N__Zz-KkcHlGlp1-XKdrstUHyuR3nsIeWFWt_XQXNUc0ZCOd37fHNkCTGR-NpnAKRWp7EsxeGvsFiEiE0ymc';
     let FETCH_URL = `${BASE_URL}q=${this.state.searchQuery}&type=artist&limit=1&access_token=${accessToken}`;
+    let ALBUM_URL = 'https://api.spotify.com/v1/artists/'
 
     fetch(FETCH_URL, {
       method: 'GET'
     })
-    .then(response => response.json())
-    .then(json => {
-      const artist = json.artists.items[0];
-      this.setState({ artist });
-    })
+      .then(response => response.json())
+      .then(json => {
+        const artist = json.artists.items[0];
+        this.setState({ artist });
+
+        FETCH_URL = `${ALBUM_URL}${artist.id}/top-tracks?country=US&access_token=${accessToken}`
+        fetch(FETCH_URL, {
+          method: 'GET'
+        })
+          .then(response => response.json())
+          .then(json => {
+            // console.log(json);
+            const { tracks } = json;
+            this.setState({ tracks });
+            // console.log(this.state);
+          })
+
+      })
   }  
 
   render(){
@@ -60,11 +76,23 @@ export default class App extends Component {
             </InputGroup>
           </FormGroup>
         </div>        
-        <div className='row'>
-          <Artist
-            artist={this.state.artist}
-          />
-        </div>
+        {
+          this.state.artist !== null
+          ?
+            <div>
+              <div className='artist-container'>
+                <Artist
+                  artist={this.state.artist}
+                />
+              </div>
+              <div>
+                <Gallery
+                  tracks={this.state.tracks}
+                />
+              </div> 
+            </div>            
+          : <div></div>
+        }
       </div>
     )
   }

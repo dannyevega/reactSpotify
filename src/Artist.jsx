@@ -13,28 +13,30 @@ export default class Artist extends Component {
 
     artist = this.props.artist !== null ? this.props.artist : artist
 
-    console.log(artist)
-
     return (
-      <div className='column'>
+      <div className='artist'>
         <img
           alt='artist'
-          className="avatar"
+          className='avatar'
           src={artist.images[0].url}
         />
-        <div>{artist.name}</div>
-        <div>{artist.followers.total}</div>
-        <div>
-          {
-            artist.genres.map((genre, idx) => {
-              genre = genre !== artist.genres[artist.genres.length - 1] ? ` ${genre}, ` : ` & ${genre}`
-              return (
-                <span key={idx}>{genre}</span>
-              )
-            })
-          }
+        <div className='artist-info'>
+          <div className='artist-name'>{artist.name}</div>
+          <div className='artist-followers'>
+            {artist.followers.total} followers
+          </div>
+          <div className='artist-genres'>
+            {
+              artist.genres.map((genre, idx) => {
+                genre = genre !== artist.genres[artist.genres.length - 1] ? ` ${genre}, ` : ` & ${genre}`
+                return (
+                  <span key={idx}>{genre}</span>
+                )
+              })
+            }
+          </div>
         </div>
-      </div>
+      </div>      
     )
   }
 }

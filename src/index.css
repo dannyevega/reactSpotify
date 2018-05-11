@@ -28,7 +28,71 @@ li {
   width: 600px;
 }
 
+
+/* Artist Component */
+
+.artist-container {
+  max-width: 800px;
+  margin: 20px auto 40px auto;
+}
+
+.artist {
+  display: flex;
+  justify-content: center;
+}
+
+.artist-info {
+  margin-left: 10px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .avatar {
-  width: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.artist-name {
+  font-size: 26px;
+}
+
+.artist-followers, .artist-genres {
+  font-size: 16px;
+}
+
+
+/* Gallery Component */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.album {
+  width: 210px;
+  height: 210px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  position: relative;
+}
+
+.album-image {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+}
+
+.album-info {
+  background: #000;
+  color: #FFF;
+  opacity: 0.75;
+  width: 210px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
 }
