@@ -55,6 +55,13 @@ export default class Gallery extends Component {
                 src={albumImg}
                 className='album-image'
               />
+              <div className="track-play">
+                <div className="track-play-inner">                  
+                  {
+                    this.state.playingPreview === track.preview_url ? <span>| |</span> : <span>&#9654;</span>
+                  }
+                </div>
+              </div>  
               <p className='album-info'>
                 {track.name}
               </p>
